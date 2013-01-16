@@ -1,4 +1,0 @@
-bazy_project
-============
-
-PWe
