@@ -1,12 +1,16 @@
 from django import template
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 
 register = template.Library()
 
 @register.simple_tag
 def navactive(request, urls):
-    if request.path in ( reverse(url) for url in urls.split() ):
-        return "active"
+    for url in urls.split():
+        if url[0] == "_":
+            if any(url[1:] in s for s in request.path.split('/')):
+                return "active"
+        elif request.path in reverse(url):
+            return "active"
     return ""
 
 @register.simple_tag

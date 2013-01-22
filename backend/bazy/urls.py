@@ -11,6 +11,7 @@ urlpatterns = patterns('bazy.views',
     # panels
     url(r'^panel$', views.panel_komunikaty,  name='panel'),
     url(r'^panel/komunikaty$', views.panel_komunikaty,  name='panel_komunikaty'),
+    url(r'^panel/komunikat/(?P<news_pk>\d+)$', views.panel_komunikat,  name='panel_komunikat'),
     url(r'^panel/oplaty$', views.panel_oplaty,  name='panel_oplaty'),
 
     # auth

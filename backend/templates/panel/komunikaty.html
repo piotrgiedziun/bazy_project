@@ -1,5 +1,26 @@
 {% extends "panel/base.html" %}
 
 {% block panel_content %}
-    KOMUNIAKTY
+    {% if newsy %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th width="10%">#</th>
+            <th width="70%">Tytuł</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for news in newsy %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{% url panel_komunikat news.pk %}">{{ news.tytul|truncatechars:50 }}</a></td>
+            <td>{{ news.data|date:"D d M Y" }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        Brak komunikatów
+    {% endif %}
 {% endblock %}

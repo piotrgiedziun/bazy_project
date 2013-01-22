@@ -1,0 +1,33 @@
+{% extends "panel/base.html" %}
+
+{% block panel_content %}
+
+
+    <div class="well">
+        <h3>{{ news.tytul }}</h3>
+        <p>{{ news.tresc }}</p>
+        <br />
+        Dodane {{ news.data }}
+    </div>
+    <hr>
+    <ul class="pager">
+        {% if prev %}
+            <li class="previous">
+                <a href="{% url panel_komunikat prev.pk %}">&larr; Starszy</a>
+            </li>
+        {% else %}
+            <li class="previous disabled">
+                <a href="#">&larr; Starszy</a>
+            </li>
+        {% endif %}
+        {% if next %}
+            <li class="next">
+                <a href="{% url panel_komunikat next.pk %}">Nowszy &rarr;</a>
+            </li>
+        {% else %}
+            <li class="next disabled">
+                <a href="#">Nowszy &rarr;</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}

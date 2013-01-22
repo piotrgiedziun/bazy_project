@@ -128,7 +128,7 @@ if DEBUG:
     EMAIL_USE_TLS = False
     DEFAULT_FROM_EMAIL = 'noreply@localhost'
 
-AUTH_PROFILE_MODULE = 'bazy.'
+AUTH_PROFILE_MODULE = 'bazy.mieszkaniec'
 
 LOGIN_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/panel"

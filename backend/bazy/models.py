@@ -56,9 +56,11 @@ class Newsy(models.Model):
     mieszkancy = models.ManyToManyField(Mieszkaniec)
     tytul = models.CharField(max_length=60)
     tresc = models.TextField()
+    data = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "newsy"
+        ordering = ['-data', '-pk']
         verbose_name = u"Newsa"
         verbose_name_plural = u"Newsy"
 
