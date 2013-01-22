@@ -1,4 +1,4 @@
-# Django settings for backend project.
+# -*- coding: utf-8 -*-
 
 # set of dirs
 import os.path
@@ -130,4 +130,4 @@ if DEBUG:
 
 LOGIN_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/panel"
-GRAPPELLI_ADMIN_TITLE = "bazy projekt"
+GRAPPELLI_ADMIN_TITLE = "Spółdzielnia ABC"
