@@ -20,31 +20,74 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/backend/settings.py">
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="28" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.0">
+            <state line="30" column="45" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-9.346154">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/bazy/static/css/custom.css">
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/panel/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="1" selection-start="824" selection-end="824" vertical-scroll-proportion="0.0">
+            <state line="12" column="38" selection-start="539" selection-end="539" vertical-scroll-proportion="-7.8461537">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="populate.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/bazy/management/commands/populate.py">
+      <file leaf-file-name="password_reset_email.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_email.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="53" selection-start="3748" selection-end="3748" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#65#0" expanded="true" />
-              </folding>
+            <state line="11" column="19" selection-start="404" selection-end="404" vertical-scroll-proportion="-7.1923075">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="password_reset_done.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_done.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="0" selection-start="47" selection-end="73" vertical-scroll-proportion="-1.9615384">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="password_reset_confirm.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_confirm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="26" selection-start="94" selection-end="94" vertical-scroll-proportion="-2.6153846">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="14" selection-start="1027" selection-end="1027" vertical-scroll-proportion="-11.115385">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="password_reset_complete.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_complete.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="60" selection-start="172" selection-end="172" vertical-scroll-proportion="-3.2692308">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="password_reset.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="14" selection-start="387" selection-end="387" vertical-scroll-proportion="0.3715847">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,41 +95,19 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/bazy/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="65" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0">
+            <state line="13" column="0" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="e#24#74#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/templates/base.html">
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/backend/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="48" selection-start="1181" selection-end="1199" vertical-scroll-proportion="-13.730769">
+            <state line="61" column="58" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base_extras.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/bazy/templatetags/base_extras.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="39" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/bazy/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="18" selection-start="322" selection-end="322" vertical-scroll-proportion="0.29565218">
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -105,22 +126,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/backend/backend/urls.py" />
-        <option value="$PROJECT_DIR$/backend/bazy/static/test.txt" />
-        <option value="$PROJECT_DIR$/backend/bazy/static/css/home.css" />
-        <option value="$PROJECT_DIR$/requirements" />
+        <option value="$PROJECT_DIR$/backend/bazy/templatetags/base_extras.py" />
         <option value="$PROJECT_DIR$/backend/templates/login.html" />
-        <option value="$PROJECT_DIR$/backend/templates/home.html" />
-        <option value="$PROJECT_DIR$/backend/bazy/management/commands/populate.py" />
-        <option value="$PROJECT_DIR$/backend/templates/oplaty.html" />
-        <option value="$PROJECT_DIR$/backend/bazy/static/css/custom.css" />
-        <option value="$PROJECT_DIR$/backend/templates/panel.html" />
-        <option value="$PROJECT_DIR$/backend/templates/panel/oplaty.html" />
+        <option value="$PROJECT_DIR$/backend/templates/password_reset.html" />
+        <option value="$PROJECT_DIR$/requirements" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/password_reset_done.html" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/password_reset_confirm.html" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/password_reset.html" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/password_reset_complete.html" />
+        <option value="$PROJECT_DIR$/backend/bazy/urls.py" />
         <option value="$PROJECT_DIR$/backend/backend/settings.py" />
         <option value="$PROJECT_DIR$/backend/bazy/views.py" />
         <option value="$PROJECT_DIR$/backend/templates/base.html" />
-        <option value="$PROJECT_DIR$/backend/bazy/templatetags/base_extras.py" />
-        <option value="$PROJECT_DIR$/backend/bazy/urls.py" />
+        <option value="$PROJECT_DIR$/backend/templates/home.html" />
+        <option value="$PROJECT_DIR$/backend/templates/panel/base.html" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/login.html" />
+        <option value="$PROJECT_DIR$/backend/templates/auth/password_reset_email.html" />
       </list>
     </option>
   </component>
@@ -242,6 +263,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bazy_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bazy_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bazy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -316,6 +359,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bazy_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bazy_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -344,6 +405,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JD\Documents\GitHub\bazy_project\backend\templates\auth" />
       <recent name="C:\Users\JD\Documents\GitHub\bazy_project\backend\templates\panel" />
       <recent name="C:\Users\JD\Documents\GitHub\bazy_project\backend" />
     </key>
@@ -535,7 +597,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12379936" sideWeight="0.6703911" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17449306" sideWeight="0.6703911" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -602,73 +664,12 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/backend/urls.py">
+    <entry file="file://$PROJECT_DIR$/backend/bazy/templatetags/base_extras.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="1" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/backend/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="1" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/backend/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="1" selection-start="272" selection-end="272" vertical-scroll-proportion="0.20695652">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="16" selection-start="30" selection-end="30" vertical-scroll-proportion="0.029565217">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/panel/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="51" selection-start="424" selection-end="424" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="82" selection-start="473" selection-end="473" vertical-scroll-proportion="0.27868852">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="0" selection-end="1329" vertical-scroll-proportion="0.287796">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/panel/oplaty.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="14" selection-start="82" selection-end="82" vertical-scroll-proportion="0.123861566">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/backend/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="28" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="12" column="39" selection-start="320" selection-end="320" vertical-scroll-proportion="0.3547826">
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -679,46 +680,107 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="26" selection-start="56" selection-end="57" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/bazy/management/commands/populate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="53" selection-start="3748" selection-end="3748" vertical-scroll-proportion="0.0">
+        <state line="87" column="56" selection-start="2850" selection-end="2850" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#65#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/bazy/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="10" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/backend/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="58" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/bazy/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="65" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0">
+        <state line="13" column="0" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#24#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="48" selection-start="1181" selection-end="1199" vertical-scroll-proportion="-13.730769">
+        <state line="30" column="45" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-9.346154">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/bazy/templatetags/base_extras.py">
+    <entry file="file://$PROJECT_DIR$/backend/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="39" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
+        <state line="19" column="0" selection-start="624" selection-end="624" vertical-scroll-proportion="0.5883424">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/bazy/urls.py">
+    <entry file="file://$PROJECT_DIR$/backend/templates/panel/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="18" selection-start="322" selection-end="322" vertical-scroll-proportion="0.29565218">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state line="12" column="38" selection-start="539" selection-end="539" vertical-scroll-proportion="-7.8461537">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="14" selection-start="1027" selection-end="1027" vertical-scroll-proportion="-11.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="19" selection-start="404" selection-end="404" vertical-scroll-proportion="-7.1923075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_done.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="47" selection-end="73" vertical-scroll-proportion="-1.9615384">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_confirm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="26" selection-start="94" selection-end="94" vertical-scroll-proportion="-2.6153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset_complete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="60" selection-start="172" selection-end="172" vertical-scroll-proportion="-3.2692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/auth/password_reset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="14" selection-start="387" selection-end="387" vertical-scroll-proportion="0.3715847">
+          <folding />
         </state>
       </provider>
     </entry>

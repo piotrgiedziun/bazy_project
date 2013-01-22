@@ -59,6 +59,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,6 +89,7 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     'bazy',
+    'bootstrapform',
 )
 
 LOGGING = {
@@ -114,6 +116,18 @@ LOGGING = {
     }
 }
 
-LOGIN_URL = "/login"
+# django message
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+# mail configuration
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'noreply@localhost'
+
+LOGIN_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/panel"
 GRAPPELLI_ADMIN_TITLE = "bazy projekt"

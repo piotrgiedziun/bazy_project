@@ -1,14 +1,16 @@
-
 {% extends "base.html" %}
+{% load base_extras %}
 
 {% block content %}
 
     <div class="tabbable tabs-left">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#">KOMUNIKATY</a></li>
-            <li><a href="#">OPŁATY</a></li>
-            <li><a href="#">ROZLICZENIA</a></li>
-            <li><a href="#">ROZLICZENIA</a></li>
+            <li class="{% navactive request 'panel_komunikaty panel' %}"><a href="{% url panel_komunikaty %}">Komunikaty</a></li>
+            <li class="{% navactive request 'panel_oplaty' %}"><a href="{% url panel_oplaty %}">Opłaty</a></li>
+            <li><a href="#">#</a></li>
+            <li><a href="#">#</a></li>
+            <li><a href="#">#</a></li>
+            <li><a href="#">#</a></li>
         </ul>
         <div class="tab-content">
             {% block panel_content %}{% endblock %}

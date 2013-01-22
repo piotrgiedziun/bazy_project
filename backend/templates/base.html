@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}Spółdzielnia - {{ title|title|default_if_none:"404" }}{% endblock %}</title>
+    <title>{% block title %}Spółdzielnia ABC - {{ title|title|default_if_none:"404" }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,29 +29,37 @@
 
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
-            <li class="{% navactive request 'home' %}"><a href="{% url home %}">Home</a></li>
+            <li class="{% navactive request 'home' %}"><a href="{% url home %}">Strona główna</a></li>
             {% if user.is_authenticated %}
-                <li class="{% navactive_contains request 'panel' %}"><a href="{% url panel %}">Panel</a></li>
-                <li><a href="{% url logout %}">Logout</a></li>
+                <li class="{% navactive_contains request 'panel' %}"><a href="{% url panel %}">Panel Klienta</a></li>
+                <li><a href="{% url logout %}">Wyloguj</a></li>
             {% else %}
-                <li class="{% navactive request 'login' %}"><a href="{% url login %}">Login</a></li>
+                <li class="{% navactive request 'panel login' %}"><a href="{% url panel %}">Panel Klienta</a></li>
             {% endif %}
-            <li><a href="#">Contact</a></li>
         </ul>
-        <h3 class="muted">Spółdzielnia</h3>
+        <h3 class="muted">Spółdzielnia ABC</h3>
     </div>
 
     <hr>
 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     {% block content %}{% endblock %}
 
     <hr>
 
     <div class="footer">
-        <p>&copy; 2012</p>
+        <p>&copy; 2013</p>
     </div>
 
-</div> <!-- /container -->
+</div>
+<!-- /container -->
 
 <!-- js -->
 <script src="http://code.jquery.com/jquery.min.js"></script>
