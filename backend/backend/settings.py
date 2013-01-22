@@ -132,4 +132,4 @@ AUTH_PROFILE_MODULE = 'bazy.'
 
 LOGIN_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/panel"
-GRAPPELLI_ADMIN_TITLE = "Spółdzielnia ABC"
+GRAPPELLI_ADMIN_TITLE = "<a href=\"../panel\">Spółdzielnia ABC</a>"
