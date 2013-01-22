@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth.models import User
 from optparse import make_option
 import sqlite3, random, os.path
 from bazy.models import *
@@ -55,17 +56,21 @@ class Populate:
                 )
                 brama.save()
 
-            mieszkaniec = Mieszkaniec(
-                imie=self.names[i]['imie'],
-                nazwisko=self.names[i]['nazwisko']
-            )
-            mieszkaniec.save()
+            user =  User.objects.create_user('user%d' % (i,), 'user%d@localhost.com' % (i,), 'user%d' % (i,))
 
-            Mieszkanie(
-                mieszkaniec = mieszkaniec,
+            mieszkanie = Mieszkanie(
                 brama = brama,
                 numer_mieszkania = (i % self.population_per_home)+1
-            ).save()
+            )
+            mieszkanie.save()
+
+            mieszkaniec = Mieszkaniec(
+                user=user,
+                imie=self.names[i]['imie'],
+                nazwisko=self.names[i]['nazwisko'],
+                mieszkanie=mieszkanie)
+            mieszkaniec.save()
+
 
 class Command(BaseCommand):
     args = 'population_size population_per_home'
@@ -84,10 +89,12 @@ class Command(BaseCommand):
             self.stdout.write('Clearing database...\n')
             Mieszkaniec.objects.all().delete()
             self.stdout.write('Flushed table "mieszkaniec"\n')
-            Brama.objects.all().delete()
-            self.stdout.write('Flushed table "brama"\n')
             Mieszkanie.objects.all().delete()
             self.stdout.write('Flushed table "mieszkanie"\n')
+            Brama.objects.all().delete()
+            self.stdout.write('Flushed table "brama"\n')
+            User.objects.filter(is_staff=False).delete()
+            self.stdout.write('Flushed table "user"\n')
 
             if len(Mieszkaniec.objects.all()) == 0 and len(Brama.objects.all()) == 0 and len(Mieszkanie.objects.all()) == 0:
                 self.stdout.write('Status: OK\n')

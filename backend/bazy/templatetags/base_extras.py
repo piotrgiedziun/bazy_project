@@ -11,6 +11,7 @@ def navactive(request, urls):
 
 @register.simple_tag
 def navactive_contains(request, title):
-    if any(title in s for s in request.path.split('/')):
-        return "active"
+    for t in title.split():
+        if any(t in s for s in request.path.split('/')):
+            return "active"
     return ""

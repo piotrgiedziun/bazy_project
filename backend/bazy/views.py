@@ -14,7 +14,7 @@ def panel_oplaty(request):
 
 @login_required
 def panel_komunikaty(request):
-    return render(request, 'panel/oplaty.html', {'title': 'Komunikaty'})
+    return render(request, 'panel/komunikaty.html', {'title': 'Komunikaty'})
 
 @login_required
 def password_change_done(request):

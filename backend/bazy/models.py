@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.auth.models import User
 
 class Mieszkaniec(models.Model):
+    mieszkanie = models.OneToOneField('Mieszkanie')
+    user = models.ForeignKey(User, unique=True)
     imie = models.CharField(max_length=60)
     nazwisko = models.CharField(max_length=60)
     telefon = models.CharField(max_length=11)
-    email = models.EmailField(max_length=60)
-    login = models.CharField(max_length=45)
-    haslo = models.CharField(max_length=45)
 
     class Meta:
         db_table = "mieszkaniec"
@@ -17,6 +17,10 @@ class Mieszkaniec(models.Model):
     def __unicode__(self):
         return u"%s %s" % (self.imie, self.nazwisko)
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ('id__iexact', 'nazwisko__icontains','imie__icontains', 'mieszkanie__brama__ulica__icontains', 'mieszkanie__brama__miejscowosc__icontains')
+
 class Brama(models.Model):
     numer_bramy = models.CharField(max_length=45)
     ulica = models.CharField(max_length=45)
@@ -24,16 +28,19 @@ class Brama(models.Model):
     kod_pocztowy = models.CharField(max_length=45)
     saldo = models.FloatField(default=0)
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ('numer_bramy__iexact', 'miejscowosc__icontains', 'ulica__icontains', 'kod_pocztowy__icontains',)
+
     class Meta:
         db_table = "brama"
         verbose_name = u"Brame"
         verbose_name_plural = u"Bramy"
 
     def __unicode__(self):
-        return u"ul.%s brama %s" % (self.ulica, self.numer_bramy)
+        return u"ul.%s brama %s " % (self.ulica, self.numer_bramy)
 
 class Mieszkanie(models.Model):
-    mieszkaniec = models.OneToOneField(Mieszkaniec)
     brama = models.ForeignKey(Brama)
     numer_mieszkania = models.CharField(max_length=10)
 
@@ -46,7 +53,7 @@ class Mieszkanie(models.Model):
         return "%s %s mieszkanie %s" % (self.brama.ulica, self.brama.numer_bramy, self.numer_mieszkania)
 
 class Newsy(models.Model):
-    mieszkaniec = models.ForeignKey(Mieszkaniec)
+    mieszkancy = models.ManyToManyField(Mieszkaniec)
     tytul = models.CharField(max_length=60)
     tresc = models.TextField()
 
@@ -73,7 +80,8 @@ class Oplaty_type(models.Model):
 class Oplaty(models.Model):
     mieszkanie = models.OneToOneField(Mieszkanie)
     oplaty_type = models.OneToOneField(Oplaty_type)
-    data_platnosci = models.DateTimeField()
+    data_platnosci = models.DateField()
+    saldo = models.DecimalField(decimal_places=2, max_digits=10)
 
     class Meta:
         db_table = "oplaty"
@@ -82,7 +90,7 @@ class Oplaty(models.Model):
 
 class Wplaty(models.Model):
     oplaty = models.OneToOneField(Oplaty)
-    data_wplaty = models.DateTimeField()
+    data_wplaty = models.DateField()
 
     class Meta:
         db_table = "wplaty"
