@@ -17,7 +17,12 @@ def panel_komunikaty(request):
     return render(request, 'panel/oplaty.html', {'title': 'Komunikaty'})
 
 @login_required
+def password_change_done(request):
+    messages.success(request, 'Twoje nowe hasło zostało ustawione.')
+    return redirect('panel')
+
+@login_required
 def logout(request):
     messages.info(request, 'Zostałeś wylogowany.')
     auth_logout(request)
-    return redirect(home)
+    return redirect('home')

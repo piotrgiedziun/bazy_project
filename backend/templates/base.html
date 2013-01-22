@@ -30,11 +30,9 @@
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
             <li class="{% navactive request 'home' %}"><a href="{% url home %}">Strona główna</a></li>
-            {% if user.is_authenticated %}
-                <li class="{% navactive_contains request 'panel' %}"><a href="{% url panel %}">Panel Klienta</a></li>
-                <li><a href="{% url logout %}">Wyloguj</a></li>
-            {% else %}
-                <li class="{% navactive request 'panel login' %}"><a href="{% url panel %}">Panel Klienta</a></li>
+            <li class="{% navactive request 'panel login' %}"><a href="{% url panel %}">Panel Klienta</a></li>
+            {% if user.is_authenticated and user.is_staff %}
+                <li><a href="/admin">Panel Administracyjny</a></li>
             {% endif %}
         </ul>
         <h3 class="muted">Spółdzielnia ABC</h3>

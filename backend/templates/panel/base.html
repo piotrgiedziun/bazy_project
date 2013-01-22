@@ -9,8 +9,8 @@
             <li class="{% navactive request 'panel_oplaty' %}"><a href="{% url panel_oplaty %}">Opłaty</a></li>
             <li><a href="#">#</a></li>
             <li><a href="#">#</a></li>
-            <li><a href="#">#</a></li>
-            <li><a href="#">#</a></li>
+            <li class="{% navactive request 'password_change' %}"><a href="{% url password_change %}">Zmień hasło</a></li>
+            <li><a href="{% url logout %}">Wyloguj</a></li>
         </ul>
         <div class="tab-content">
             {% block panel_content %}{% endblock %}
