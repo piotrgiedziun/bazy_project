@@ -4,22 +4,22 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
+    <title>{% block title %}Spółdzielnia - {{ title|title|default_if_none:"404" }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
+    <!-- css -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/custom.css" %}" rel="stylesheet">
     <link href="{% static "css/bootstrap-responsive.min.css" %}" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Fav icon -->
+    <!-- icon -->
     <link rel="shortcut icon" href="{% static "static/ico/favicon.png" %}">
 </head>
 
@@ -31,6 +31,7 @@
         <ul class="nav nav-pills pull-right">
             <li class="{% navactive request 'home' %}"><a href="{% url home %}">Home</a></li>
             {% if user.is_authenticated %}
+                <li class="{% navactive_contains request 'panel' %}"><a href="{% url panel %}">Panel</a></li>
                 <li><a href="{% url logout %}">Logout</a></li>
             {% else %}
                 <li class="{% navactive request 'login' %}"><a href="{% url login %}">Login</a></li>
@@ -52,10 +53,9 @@
 
 </div> <!-- /container -->
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+<!-- js -->
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 
 </body>
 </html>

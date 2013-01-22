@@ -1,8 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
-import sqlite3
-import random
+import sqlite3, random, os.path
 from bazy.models import *
+
+DATABASE_PATH = os.path.join("..", "populate.db")
 
 class Populate:
 
@@ -103,6 +104,6 @@ class Command(BaseCommand):
         else:
             population_per_home = input("Enter population per home (default: 5): ")
 
-        p = Populate(sqlite3.connect('../populate.db'), population_size, population_per_home)
+        p = Populate(sqlite3.connect(DATABASE_PATH), population_size, population_per_home)
         p.start()
         self.stdout.write('Successfully populated\n')
