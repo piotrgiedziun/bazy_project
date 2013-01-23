@@ -1,8 +1,8 @@
 {% extends "panel/base.html" %}
+{% load static from staticfiles %}
 
 {% block panel_content %}
-
-
+    <a class="btn komunikat-back" href="{% url panel_komunikaty %}"><i class="icon-arrow-left"></i> Powrót do listy wiadomości</a>
     <div class="well">
         <h3>{{ news.tytul }}</h3>
         <p>{{ news.tresc }}</p>
@@ -13,7 +13,7 @@
     <ul class="pager">
         {% if prev %}
             <li class="previous">
-                <a href="{% url panel_komunikat prev.pk %}">&larr; Starszy</a>
+                <a id="prev_page" href="{% url panel_komunikat prev.pk %}">&larr; Starszy</a>
             </li>
         {% else %}
             <li class="previous disabled">
@@ -22,7 +22,7 @@
         {% endif %}
         {% if next %}
             <li class="next">
-                <a href="{% url panel_komunikat next.pk %}">Nowszy &rarr;</a>
+                <a id="next_page" href="{% url panel_komunikat next.pk %}">Nowszy &rarr;</a>
             </li>
         {% else %}
             <li class="next disabled">
@@ -30,4 +30,8 @@
             </li>
         {% endif %}
     </ul>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static "js/arrows.js" %}"></script>
 {% endblock %}

@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 from optparse import make_option
 import sqlite3, random, os.path
 from bazy.models import *
+import datetime
 
 DATABASE_PATH = os.path.join("..", "populate.db")
 
@@ -45,6 +47,14 @@ class Populate:
         self.get_names()
         self.get_addressese()
 
+        # populate Oplaty_type
+        oplaty_types = ['czynsz', 'kredyt', 'rozlicznienie wody', \
+            'rozlicznie ciepła', 'garaż', 'wykup gruntu', 'fundusz remontowy', 'inne']
+        for oplaty_type in oplaty_types:
+            Oplaty_type(name=oplaty_type).save()
+
+        oplaty_types = Oplaty_type.objects.all()
+
         homes_count = -1
         for i in range(len(self.names)):
             if i % self.population_per_home == 0:
@@ -71,7 +81,19 @@ class Populate:
                 mieszkanie=mieszkanie)
             mieszkaniec.save()
 
-        # populate news
+        # populate Oplaty
+        for mieszkaniec in Mieszkaniec.objects.all():
+            for miesiac in range(1,13):
+                for oplaty_type in oplaty_types:
+                    if random.randrange(0,10) != 0:
+                        Oplaty(
+                            mieszkanie=mieszkaniec.mieszkanie,
+                            oplaty_type=oplaty_type,
+                            data_platnosci=datetime.date(2013, miesiac, 1),
+                            saldo=float(random.randrange(10,100)),
+                        ).save()
+
+        # populate news for each user
         for i in range(0, 20):
             n = Newsy(tytul="Wiadomosc %d" % (i,),tresc="testowa tresc",)
             n.save()
@@ -94,6 +116,10 @@ class Command(BaseCommand):
 
         if options['clear']:
             self.stdout.write('Clearing database...\n')
+            Oplaty_type.objects.all().delete()
+            self.stdout.write('Flushed table "oplaty_type"\n')
+            Oplaty.objects.all().delete()
+            self.stdout.write('Flushed table "oplaty"\n')
             Mieszkaniec.objects.all().delete()
             self.stdout.write('Flushed table "mieszkaniec"\n')
             Mieszkanie.objects.all().delete()
@@ -103,7 +129,7 @@ class Command(BaseCommand):
             Newsy.objects.all().delete()
             self.stdout.write('Flushed table "newsy"\n')
             User.objects.filter(is_staff=False).delete()
-            self.stdout.write('Flushed table "user"\n')
+            self.stdout.write('Flushed table "user (except root account)\n')
 
             if len(Mieszkaniec.objects.all()) == 0 and len(Brama.objects.all()) == 0 and len(Mieszkanie.objects.all()) == 0:
                 self.stdout.write('Status: OK\n')

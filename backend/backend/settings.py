@@ -130,6 +130,7 @@ if DEBUG:
 
 AUTH_PROFILE_MODULE = 'bazy.mieszkaniec'
 
+KOMUNIKATY_PER_PAGE = 5
 LOGIN_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/panel/main"
 GRAPPELLI_ADMIN_TITLE = "<a href=\"http://156.17.234.23:8080/panel\">Spółdzielnia ABC</a>"

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# django
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout as auth_logout
@@ -6,14 +7,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseNotFound
-from models import Newsy
+from django.conf import settings
+
+# internal
+from models import Newsy, Oplaty, Mieszkaniec
 from decorators import login_mieszkaniec_required
 
+# python
+import datetime
+
 def home(request):
-    return render(request, 'home.html', {'title': 'Home'})
+    return render(request, 'home.html', {'title': 'Strona główna'})
 
 @login_mieszkaniec_required
 def panel_oplaty(request):
+    mieszkaniec = request.user.get_profile()
+    oplaty = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie)
+
+    print oplaty
+
     return render(request, 'panel/oplaty.html', {'title': 'Oplaty'})
 
 @login_mieszkaniec_required
@@ -21,7 +33,7 @@ def panel_komunikaty(request):
     mieszkaniec = request.user.get_profile()
     newsy = Newsy.objects.filter(mieszkancy=mieszkaniec)
 
-    paginator = Paginator(newsy, 5)
+    paginator = Paginator(newsy, settings.KOMUNIKATY_PER_PAGE)
 
     page = request.GET.get('page')
     try:

@@ -80,8 +80,8 @@ class Oplaty_type(models.Model):
         return u"%s" % (self.name,)
 
 class Oplaty(models.Model):
-    mieszkanie = models.OneToOneField(Mieszkanie)
-    oplaty_type = models.OneToOneField(Oplaty_type)
+    mieszkanie = models.ForeignKey(Mieszkanie)
+    oplaty_type = models.ForeignKey(Oplaty_type)
     data_platnosci = models.DateField()
     saldo = models.DecimalField(decimal_places=2, max_digits=10)
 
