@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from models import Newsy
 
 def home(request):
@@ -17,7 +18,18 @@ def panel_oplaty(request):
 def panel_komunikaty(request):
     mieszkaniec = request.user.get_profile()
     newsy = Newsy.objects.filter(mieszkancy=mieszkaniec)
-    return render(request, 'panel/komunikaty.html', {'title': 'Komunikaty', 'newsy': newsy})
+
+    paginator = Paginator(newsy, 5)
+
+    page = request.GET.get('page')
+    try:
+        newsy_paginate = paginator.page(page)
+    except PageNotAnInteger:
+        newsy_paginate = paginator.page(1)
+    except EmptyPage:
+        newsy_paginate = paginator.page(paginator.num_pages)
+
+    return render(request, 'panel/komunikaty.html', {'title': 'Komunikaty', 'newsy': newsy_paginate, 'pages': paginator.page_range})
 
 @login_required
 def panel_komunikat(request, news_pk):

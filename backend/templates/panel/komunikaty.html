@@ -2,24 +2,50 @@
 
 {% block panel_content %}
     {% if newsy %}
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th width="10%">#</th>
-            <th width="70%">Tytuł</th>
-            <th>Data</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for news in newsy %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td><a href="{% url panel_komunikat news.pk %}">{{ news.tytul|truncatechars:50 }}</a></td>
-            <td>{{ news.data|date:"D d M Y" }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th width="10%">#</th>
+                <th width="70%">Tytuł</th>
+                <th>Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for news in newsy %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url panel_komunikat news.pk %}">{{ news.tytul|truncatechars:50 }}</a></td>
+                    <td>{{ news.data|date:"D d M Y" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% load i18n %}
+        <div class="pagination">
+            <ul>
+                {% if newsy.has_previous %}
+                    <li><a href="?page={{ newsy.previous_page_number }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+                {% else %}
+                    <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+                {% endif %}
+                {% for page in pages %}
+                    {% if page %}
+                        {% ifequal page newsy.number %}
+                            <li class="current page active"><a href="#">{{ page }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ page }}" class="page">{{ page }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+                {% if newsy.has_next %}
+                    <li><a href="?page={{ newsy.next_page_number }}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+                {% else %}
+                    <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
     {% else %}
         Brak komunikatów
     {% endif %}

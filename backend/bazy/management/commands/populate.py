@@ -71,6 +71,13 @@ class Populate:
                 mieszkanie=mieszkanie)
             mieszkaniec.save()
 
+        # populate news
+        for i in range(0, 20):
+            n = Newsy(tytul="Wiadomosc %d" % (i,),tresc="testowa tresc",)
+            n.save()
+            n.mieszkancy.add(*[m.id for m in Mieszkaniec.objects.all()]),
+            n.save()
+
 
 class Command(BaseCommand):
     args = 'population_size population_per_home'
@@ -93,6 +100,8 @@ class Command(BaseCommand):
             self.stdout.write('Flushed table "mieszkanie"\n')
             Brama.objects.all().delete()
             self.stdout.write('Flushed table "brama"\n')
+            Newsy.objects.all().delete()
+            self.stdout.write('Flushed table "newsy"\n')
             User.objects.filter(is_staff=False).delete()
             self.stdout.write('Flushed table "user"\n')
 
