@@ -14,19 +14,27 @@ from models import Newsy, Oplaty, Mieszkaniec
 from decorators import login_mieszkaniec_required
 
 # python
-import datetime
+from datetime import date
 
 def home(request):
     return render(request, 'home.html', {'title': 'Strona główna'})
 
 @login_mieszkaniec_required
 def panel_oplaty(request):
+    today = date.today()
+    month = request.GET.get('month', today.month)
+    year = request.GET.get('year', today.year)
+
     mieszkaniec = request.user.get_profile()
-    oplaty = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie)
+    oplaty = Oplaty.objects.filter(
+        mieszkanie=mieszkaniec.mieszkanie,
+        data_platnosci__month=month,
+        data_platnosci__year=year,
+    )
 
-    print oplaty
+    pln_sum = sum([oplata.saldo for oplata in oplaty])
 
-    return render(request, 'panel/oplaty.html', {'title': 'Oplaty'})
+    return render(request, 'panel/oplaty.html', {'title': 'Oplaty', 'oplaty': oplaty, 'pln_sum': pln_sum})
 
 @login_mieszkaniec_required
 def panel_komunikaty(request):

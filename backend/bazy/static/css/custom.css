@@ -71,3 +71,13 @@ h3 a:hover {
 .komunikat-back {
     margin-bottom: 10px;
 }
+
+.text-right td, .text-right th {
+    text-align: right;
+}
+
+.centered-pills { text-align:center; }
+.centered-pills ul.nav-pills { display:inline-block; }
+.centered-pills li { display:inline; }
+.centered-pills a { float:left; }
+.centered-pills .nav { margin-bottom: 5px; }

@@ -1,5 +1,85 @@
 {% extends "panel/base.html" %}
+{% load base_extras %}
+{% load static from staticfiles %}
 
 {% block panel_content %}
-    OPLATY
+    <!-- report -->
+    <div id="reportModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Zgłoś uwagę"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Zgłoś uwagę</h3>
+        </div>
+        <div class="modal-body">
+            <p>Uwaga dotyczy opłaty:</p>
+            <ul>
+                <li>Data: <span class="date"></span></li>
+                <li>Typ: <span class="type"></span></li>
+                <li>Saldo: <span class="price"></span></li>
+            </ul>
+
+            <strong>Treść uwagi:</strong><br/>
+            <textarea class="input-block-level" rows="4" id="message"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="cancel btn" data-dismiss="modal" aria-hidden="true">Anuluj</button>
+            <button class="send btn btn-primary" data-loading-text="Wysyłanie...">Wyślij</button>
+        </div>
+    </div>
+    <!-- opłaty -->
+    {% if oplaty %}
+        <div class="row-fluid">
+            <div class="span12 centered-pills">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">Tabela</a></li>
+                    <li><a href="#">Wykres</a></li>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-bordered text-right">
+            <thead>
+            <tr>
+                <th>Rodzaj opłaty</th>
+                <th>Saldo</th>
+                <th width="10%">Uwagi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for oplata in oplaty %}
+                <tr>
+                    <td>{{ oplata.oplaty_type.name|truncatechars:50 }}</td>
+                    <td>{{ oplata.saldo|pln }}</td>
+                    <td style="text-align: center;">
+                        <a class="report btn btn-mini"
+                           data-date="{{ oplata.data_platnosci|date:"M Y" }}"
+                           data-type="{{ oplata.oplaty_type.name }}"
+                           data-price="{{ oplata.saldo|pln }}"
+                           href="#">
+                            <i class="icon-warning-sign" title="Zgłoś uwage"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td><strong>SUMA</strong></td>
+                <td><strong>{{ pln_sum|pln }}</strong></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="pager">
+            <li class="previous">
+                <a href="#">&larr; Older</a>
+            </li>
+            <li class="next">
+                <a href="#">Newer &rarr;</a>
+            </li>
+        </ul>
+    {% else %}
+        Brak opłat dla tego konta
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script src="{% static "js/report.js" %}"></script>
 {% endblock %}

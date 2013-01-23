@@ -8,12 +8,16 @@ from models import Mieszkaniec
 def login_mieszkaniec_required(view_func):
     @wraps(view_func)
     def _checklogin(request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return redirect('login')
+
         if not request.user.is_active:
             messages.error(request, "Brak uprawnień")
             return redirect('login')
+
         try:
-        	request.user.get_profile()
-        	return view_func(request, *args, **kwargs)
+            request.user.get_profile()
+            return view_func(request, *args, **kwargs)
         except Mieszkaniec.DoesNotExist:
             messages.error(request, "To konto nie posiada przypisanego mieszkańca")
             logout(request)

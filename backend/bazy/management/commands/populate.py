@@ -95,7 +95,7 @@ class Populate:
 
         # populate news for each user
         for i in range(0, 20):
-            n = Newsy(tytul="Wiadomosc %d" % (i,),tresc="testowa tresc",)
+            n = Newsy(tytul="To jest wiadomosc numer %d proszę się z nią zapoznać" % (i,),tresc="testowa tresc",)
             n.save()
             n.mieszkancy.add(*[m.id for m in Mieszkaniec.objects.all()]),
             n.save()

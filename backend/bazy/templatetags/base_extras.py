@@ -19,3 +19,8 @@ def navactive_contains(request, title):
         if any(t in s for s in request.path.split('/')):
             return "active"
     return ""
+
+@register.filter
+def pln(pln):
+    dollars = round(float(pln), 2)
+    return "%s%s PLN" % (int(pln), ("%0.2f" % pln)[-3:])
