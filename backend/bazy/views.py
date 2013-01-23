@@ -5,16 +5,18 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponseNotFound
 from models import Newsy
+from decorators import login_mieszkaniec_required
 
 def home(request):
     return render(request, 'home.html', {'title': 'Home'})
 
-@login_required
+@login_mieszkaniec_required
 def panel_oplaty(request):
     return render(request, 'panel/oplaty.html', {'title': 'Oplaty'})
 
-@login_required
+@login_mieszkaniec_required
 def panel_komunikaty(request):
     mieszkaniec = request.user.get_profile()
     newsy = Newsy.objects.filter(mieszkancy=mieszkaniec)
@@ -31,7 +33,7 @@ def panel_komunikaty(request):
 
     return render(request, 'panel/komunikaty.html', {'title': 'Komunikaty', 'newsy': newsy_paginate, 'pages': paginator.page_range})
 
-@login_required
+@login_mieszkaniec_required
 def panel_komunikat(request, news_pk):
     mieszkaniec = request.user.get_profile()
     news = Newsy.objects.get(mieszkancy=mieszkaniec, pk=news_pk)
@@ -47,7 +49,7 @@ def panel_komunikat(request, news_pk):
 
     return render(request, 'panel/komunikat.html', {'title': 'Komunikaty', 'news': news, 'next':next, 'prev':prev})
 
-@login_required
+@login_mieszkaniec_required
 def password_change_done(request):
     messages.success(request, 'Twoje nowe hasło zostało ustawione.')
     return redirect('panel')
