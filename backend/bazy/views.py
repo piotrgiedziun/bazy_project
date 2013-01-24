@@ -6,17 +6,18 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.conf import settings
 from django.db.models import Sum, Avg, Max, Min
+from django.utils.encoding import smart_str
 
 # internal
-from models import Newsy, Oplaty, Mieszkaniec
+from models import Newsy, Oplaty, Oplaty_type
 from decorators import login_mieszkaniec_required
 
 # python
 from datetime import date
-import itertools
+import itertools, os
 
 # export
 from openpyxl import Workbook
@@ -42,7 +43,9 @@ def panel_oplaty_chart_1(request):
 def panel_oplaty_chart_2(request):
     mieszkaniec = request.user.get_profile()
 
-    oplaty = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).values('oplaty_type__name').annotate(avg=Avg('saldo'), max=Max('saldo'), min=Min('saldo'), sum=Sum('saldo'))
+    oplaty = Oplaty.objects.exclude(oplaty_type__name='nadpłata')\
+        .filter(mieszkanie=mieszkaniec.mieszkanie).values('oplaty_type__name')\
+        .annotate(avg=Avg('saldo'), max=Max('saldo'), min=Min('saldo'), sum=Sum('saldo'))
 
     return render(request, 'panel/oplaty_chart_2.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty})
 
@@ -127,28 +130,80 @@ def panel_komunikat(request, news_pk):
 def panel_export_main(request):
     mieszkaniec = request.user.get_profile()
 
-    oplaty = Oplaty.objects.filter(
-        mieszkanie=mieszkaniec.mieszkanie,
-    )
-    grouped = itertools.groupby(oplaty, lambda record: record.data_platnosci.strftime("%Y-%m"))
-    print grouped
-    jobs_by_day = [(day, len(list(jobs_this_day))) for day, jobs_this_day in grouped]
-    print jobs_by_day
+    years = []
+    for o in Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).values('data_platnosci').annotate():
+        if not o['data_platnosci'].year in years:
+            years.append(o['data_platnosci'].year)
 
-    return render(request, 'panel/export.html', {'title': 'Eksport'})
+    return render(request, 'panel/export.html', {'title': 'Eksport', 'years':years})
 
 @login_mieszkaniec_required
-def panel_export(request, type, value):
+def panel_export(request, year):
+    mieszkaniec = request.user.get_profile()
+
+    oplaty_all = Oplaty.objects.filter(
+        mieszkanie=mieszkaniec.mieszkanie,
+        data_platnosci__year=year
+    ).order_by('data_platnosci')
+
+    oplaty_type = Oplaty_type.objects.all()
+
+    grouped = itertools.groupby(oplaty_all, lambda record: record.data_platnosci.strftime("%m-%Y"))
+
+    # generate
     wb = Workbook(encoding='utf-8')
     ws = wb.get_active_sheet()
     ws.title = u"Opłaty"
 
-    for i in range(0, 10):
-        d = ws.cell(row = i, column = 2)
-        d.value = i
+    # dict oplaty_type
+    i = 0
+    oplaty_type_to_id  = {}
+    for ot in oplaty_type:
+        oplaty_type_to_id[ot.pk] = i
+        i += 1
 
+    # set data
+    oplaty_list = []
+    dates = []
+    for date, items in grouped:
+        dates.append(date)
+        append_list = [0]*len(oplaty_type)
+        for o in list(items):
+            try:
+                append_list[oplaty_type_to_id[o.oplaty_type.pk]] = o
+            except:
+                pass
+        oplaty_list.append(append_list)
+
+    for y in range(0, len(oplaty_list)):
+        oplaty = oplaty_list[y]
+        for x in range(0, len(oplaty_type)):
+            d = ws.cell(row = x+1, column = y+1)
+            try:
+                d.value = float(oplaty[x].saldo)
+            except:
+                d.value = 0
+
+    # set titles
+    i = 1
+    for v in [o.name for o in oplaty_type]:
+        ws.cell(row=i, column=0).value = v
+        i += 1
+    i = 1
+    for v in dates:
+        ws.cell(row=0, column=i).value = v
+        i += 1
+
+    # set size
+    ws.column_dimensions['A'].width = 25
 
     wb.save('export.xlsx')
+
+    response = HttpResponse(mimetype='application/xlsx')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str('export.xlsx')
+    response.write(open('export.xlsx', 'rb').read())
+
+    return response
 
 @login_mieszkaniec_required
 def password_change_done(request):

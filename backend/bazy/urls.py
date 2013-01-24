@@ -15,7 +15,8 @@ urlpatterns = patterns('bazy.views',
     url(r'^panel/oplaty/main$', views.panel_oplaty, name='panel_oplaty'),
     url(r'^panel/oplaty/chart/1$', views.panel_oplaty_chart_1, name='panel_oplaty_chart_1'),
     url(r'^panel/oplaty/chart/2$', views.panel_oplaty_chart_2, name='panel_oplaty_chart_2'),
-    url(r'^panel/export', views.panel_export_main,  name='panel_export_main'),
+    url(r'^panel/export$', views.panel_export_main,  name='panel_export_main'),
+    url(r'^panel/export/(?P<year>\d+)$', views.panel_export,  name='panel_export'),
 
     # auth
     url(r'^auth/logout$', views.logout, name='logout'),

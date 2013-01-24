@@ -48,12 +48,12 @@ class Populate:
         self.get_addressese()
 
         # populate Oplaty_type
-        oplaty_types = ['czynsz', 'kredyt', 'rozlicznienie wody', \
-            'rozlicznie ciepła', 'garaż', 'wykup gruntu', 'fundusz remontowy', 'inne']
+        oplaty_types = ['czynsz', 'kredyt', 'rozlicznienie wody',\
+            'rozlicznie ciepła', 'garaż', 'wykup gruntu', 'fundusz remontowy', 'inne', 'nadpłata']
         for oplaty_type in oplaty_types:
             Oplaty_type(name=oplaty_type).save()
 
-        oplaty_types = Oplaty_type.objects.all()
+        oplaty_types = Oplaty_type.objects.exclude(name='nadpłata').all()
 
         homes_count = -1
         for i in range(len(self.names)):
@@ -92,14 +92,23 @@ class Populate:
                             data_platnosci=datetime.date(2013, miesiac, 1),
                             saldo=float(random.randrange(10,100)),
                         ).save()
-
         # populate news for each user
         for i in range(0, 20):
             n = Newsy(tytul="To jest wiadomosc numer %d proszę się z nią zapoznać" % (i,),tresc="testowa tresc",)
             n.save()
-            n.mieszkancy.add(*[m.id for m in Mieszkaniec.objects.all()]),
+            n.mieszkancy.add(*[m.id for m in Mieszkaniec.objects.exclude(pk=1).all()]),
             n.save()
 
+        # dodaj nadpłade dla acc user1
+        mieszkaniec = Mieszkaniec.objects.get(pk=1)
+        nadplata = Oplaty_type.objects.get(name='nadpłata')
+        for miesiac in range(1,13):
+            Oplaty(
+                mieszkanie=mieszkaniec.mieszkanie,
+                oplaty_type=nadplata,
+                data_platnosci=datetime.date(2013, miesiac, 1),
+                saldo=float(random.randrange(-100,-10)),
+            ).save()
 
 class Command(BaseCommand):
     args = 'population_size population_per_home'
@@ -116,10 +125,10 @@ class Command(BaseCommand):
 
         if options['clear']:
             self.stdout.write('Clearing database...\n')
-            Oplaty_type.objects.all().delete()
-            self.stdout.write('Flushed table "oplaty_type"\n')
             Oplaty.objects.all().delete()
             self.stdout.write('Flushed table "oplaty"\n')
+            Oplaty_type.objects.all().delete()
+            self.stdout.write('Flushed table "oplaty_type"\n')
             Mieszkaniec.objects.all().delete()
             self.stdout.write('Flushed table "mieszkaniec"\n')
             Mieszkanie.objects.all().delete()

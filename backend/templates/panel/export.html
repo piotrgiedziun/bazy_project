@@ -10,8 +10,9 @@
             <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">Eksportuj rok <span
                     class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">2013</a></li>
-                <li><a href="#">2012</a></li>
+                {% for year in years %}
+                <li><a href="{% url panel_export year %}">{{ year }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
