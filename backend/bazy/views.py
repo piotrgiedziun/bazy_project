@@ -12,12 +12,12 @@ from django.db.models import Sum, Avg, Max, Min
 from django.utils.encoding import smart_str
 
 # internal
-from models import Newsy, Oplaty, Oplaty_type
+from models import Newsy, Oplaty, Oplaty_type, Wplaty
 from decorators import login_mieszkaniec_required
 
 # python
 from datetime import date
-import itertools, os
+import itertools
 
 # export
 from openpyxl import Workbook
@@ -27,7 +27,22 @@ def home(request):
 
 @login_mieszkaniec_required
 def panel_rozliczenia(request):
-    return render(request, 'panel/rozliczenia.html', {'title': 'Rozliczenia'})
+    mieszkaniec = request.user.get_profile()
+
+    oplaty_suma = Oplaty.objects.exclude(oplaty_type__name='nadpłata')\
+        .filter(mieszkanie=mieszkaniec.mieszkanie).aggregate(sum=Sum('saldo'))
+    wplaty_suma = Wplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).aggregate(sum=Sum('saldo'))
+
+    saldo = oplaty_suma['sum']-wplaty_suma['sum']
+    nadplata = 0
+
+    ostatnia_nadplata = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie, oplaty_type__name='nadpłata').latest('pk')
+    ostatnia_oplata = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).latest('pk')
+
+    if ostatnia_oplata.data_platnosci <= ostatnia_nadplata.data_platnosci:
+         nadplata = abs(ostatnia_nadplata.saldo)
+
+    return render(request, 'panel/rozliczenia.html', {'title': 'Rozliczenia', 'saldo': saldo, 'nadplata': nadplata, 'ostatnia_oplata': ostatnia_oplata})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_1(request):
@@ -36,6 +51,8 @@ def panel_oplaty_chart_1(request):
     oplata_suma = Oplaty.objects.exclude(oplaty_type__name='nadpłata')\
         .filter(mieszkanie=mieszkaniec.mieszkanie).values('data_platnosci')\
         .annotate(sum=Sum('saldo'))
+    wplaty_suma = Wplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie)\
+        .values('data_wplaty').annotate(sum=Sum('saldo'))
 
     oplaty_by_type = {}
     for o in oplaty_all:
@@ -43,7 +60,8 @@ def panel_oplaty_chart_1(request):
             oplaty_by_type[o.oplaty_type.pk] = []
         oplaty_by_type[o.oplaty_type.pk].append(o)
 
-    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items(),'oplata_suma':oplata_suma})
+    return render(request, 'panel/oplaty_chart_1.html',
+        {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items(),'oplata_suma':oplata_suma, 'wplaty_suma':wplaty_suma})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_2(request):

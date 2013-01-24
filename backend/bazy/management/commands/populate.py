@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from optparse import make_option
 import sqlite3, random, os.path
 from bazy.models import *
@@ -99,6 +100,17 @@ class Populate:
             n.mieszkancy.add(*[m.id for m in Mieszkaniec.objects.exclude(pk=1).all()]),
             n.save()
 
+        # populate Wplaty
+        for mieszkaniec in Mieszkaniec.objects.all():
+            oplata_suma = Oplaty.objects.exclude(oplaty_type__name='nadpłata')\
+                .filter(mieszkanie=mieszkaniec.mieszkanie).values('data_platnosci')\
+                .annotate(sum=Sum('saldo'))
+            for o in oplata_suma:
+                Wplaty(
+                    mieszkanie=mieszkaniec.mieszkanie,
+                    data_wplaty=o['data_platnosci'],
+                    saldo=o['sum'],
+                ).save()
         # dodaj nadpłade dla acc user1
         mieszkaniec = Mieszkaniec.objects.get(pk=1)
         nadplata = Oplaty_type.objects.get(name='nadpłata')

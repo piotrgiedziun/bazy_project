@@ -46,10 +46,15 @@ class MieszkaniecAdmin(admin.ModelAdmin):
     list_filter = ['mieszkanie__brama__ulica', 'mieszkanie__brama__miejscowosc', 'mieszkanie__brama']
     search_fields = ['mieszkanie__brama__ulica', 'mieszkanie__brama__miejscowosc']
 
+class WplatyAdmin(admin.ModelAdmin):
+    list_display = ('data_wplaty', 'saldo')
+    list_filter = ['mieszkanie__brama', 'mieszkanie', 'mieszkanie__mieszkaniec', 'data_wplaty']
+    search_fields = ['mieszkanie__brama__ulica', 'mieszkanie__brama__miejscowosc', 'mieszkanie__mieszkaniec__nazwisko']
+
 admin.site.register(Mieszkanie, MieszkanieAdmin)
 admin.site.register(Newsy, NewsyAdmin)
 admin.site.register(Mieszkaniec, MieszkaniecAdmin)
 admin.site.register(Brama)
 admin.site.register(Oplaty, OplatyAdmin)
 admin.site.register(Oplaty_type)
-admin.site.register(Wplaty)
+admin.site.register(Wplaty, WplatyAdmin)

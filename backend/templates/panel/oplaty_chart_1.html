@@ -20,7 +20,7 @@
 
             // suma
             series_data[series_data.length] = {
-                name: "SUMA",
+                name: "SUMA OPŁAT",
                 visible: false,
                 data: [{% for data in oplata_suma %}
                     [{{ data.data_platnosci|date:"U" }}*1000,{{ data.sum|floatformat:0 }}]{% if not forloop.last %},{% endif %}
@@ -28,7 +28,13 @@
             };
 
             // wplaty
-
+            series_data[series_data.length] = {
+                name: "SUMA WPŁAT",
+                visible: false,
+                data: [{% for data in wplaty_suma %}
+                    [{{ data.data_wplaty|date:"U" }}*1000,{{ data.sum|floatformat:0 }}]{% if not forloop.last %},{% endif %}
+                {% endfor %}]
+            };
 
             window.chart = new Highcharts.StockChart({
                 chart: {

@@ -3,5 +3,25 @@
 {% load static from staticfiles %}
 
 {% block panel_content %}
-    TAK
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td>Pozostało do zapłaty</td>
+            <td>
+                {% if saldo > 0 %}<span style="color: red;">{% endif %}
+                <b>{{ saldo|pln }}</b>
+                {% if saldo > 0 %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Wysokość nadpłaty</td>
+            <td><b>{{ nadplata|pln }}</b></td>
+        </tr>
+
+        <tr>
+            <td>Data naliczenia opłat</td>
+            <td>{{ ostatnia_oplata.data_platnosci|date }}</td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}
