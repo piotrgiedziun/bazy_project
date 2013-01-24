@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.conf import settings
+from django.db.models import Count
 
 # internal
 from models import Newsy, Oplaty, Mieszkaniec
@@ -26,7 +27,16 @@ def home(request):
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_1(request):
-    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
+    mieszkaniec = request.user.get_profile()
+    oplaty_all = get_list_or_404(Oplaty, mieszkanie=mieszkaniec.mieszkanie)
+
+    oplaty_by_type = {}
+    for o in oplaty_all:
+        if not o.oplaty_type.pk in oplaty_by_type:
+            oplaty_by_type[o.oplaty_type.pk] = []
+        oplaty_by_type[o.oplaty_type.pk].append(o)
+    print oplaty_by_type.items()
+    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items()})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_2(request):

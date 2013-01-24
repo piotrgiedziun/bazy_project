@@ -3,33 +3,70 @@
 {% load static from staticfiles %}
 
 {% block oplaty_content %}
-    <div id="container" style="height: 500px; min-width: 500px"></div>
-    <script>
+    <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
         $(function() {
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
-                // Create the chart
-                window.chart = new Highcharts.StockChart({
-                    chart: {
-                        renderTo: 'container'
-                    },
+            var series_data = [];
 
-                    rangeSelector: {
-                        selected: 1
-                    },
+            {% for k, oplaty_type in oplaty %}
+            series_data[{{ forloop.counter0 }}] = {
+                name: "{{ oplaty_type.0.oplaty_type.name }}",
+                visible: {% if forloop.counter0 < 3 %}true{% else %}false{% endif %},
+                data: [{% for o in oplaty_type %}
+                    [{{ o.data_platnosci|date:"U" }}*1000,{{ o.saldo }}]{% if not forloop.last %},{% endif %}
+                {% endfor %}]
+            };
+            {% endfor %}
 
+            window.chart = new Highcharts.StockChart({
+                chart: {
+                    renderTo: 'container'
+                },
+                navigation: {
+                    buttonOptions: {
+                        enabled: false
+                    }
+                },
+                rangeSelector : {
+                    buttons : [{
+                        type : 'month',
+                        count : 3,
+                        text : '3m'
+                    }, {
+                        type : 'month',
+                        count : 6,
+                        text : '6m'
+                    },{
+                        type : 'month',
+                        count : 12,
+                        text : '1y'
+                    }, {
+                        type : 'all',
+                        count : 1,
+                        text : 'All'
+                    }],
+                    selected : 0,
+                    inputEnabled : false
+                },
+                legend: {
+                    enabled: true,
+                    verticalAlign: 'top'
+                },
+                yAxis: {
                     title: {
-                        text: 'AAPL Stock Price'
-                    },
+                        text: 'Opłata [PLN]'
+                    }
+                },
+                xAxis: {
+                    title: {
+                        text: 'Data'
+                    }
+                },
+                title: {
+                    text: ''
+                },
 
-                    series: [{
-                        name: 'AAPL Stock Price',
-                        data: data,
-                        step: true,
-                        tooltip: {
-                            valueDecimals: 2
-                        }
-                    }]
-                });
+                series: series_data
             });
         });
     </script>
@@ -39,5 +76,4 @@
     {{ block.super }}
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="{% static "js/arrows.js" %}"></script>
 {% endblock %}
