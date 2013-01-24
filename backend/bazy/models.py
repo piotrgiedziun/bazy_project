@@ -94,8 +94,9 @@ class Oplaty(models.Model):
         return u"Opłata #%d" % (self.pk,)
 
 class Wplaty(models.Model):
-    oplaty = models.OneToOneField(Oplaty)
     data_wplaty = models.DateField()
+    mieszkanie = models.ForeignKey(Mieszkanie)
+    saldo = models.DecimalField(decimal_places=2, max_digits=10)
 
     class Meta:
         db_table = "wplaty"

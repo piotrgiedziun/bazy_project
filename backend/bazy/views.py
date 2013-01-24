@@ -25,11 +25,17 @@ from openpyxl import Workbook
 def home(request):
     return render(request, 'home.html', {'title': 'Strona główna'})
 
+@login_mieszkaniec_required
+def panel_rozliczenia(request):
+    return render(request, 'panel/rozliczenia.html', {'title': 'Rozliczenia'})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_1(request):
     mieszkaniec = request.user.get_profile()
     oplaty_all = get_list_or_404(Oplaty, mieszkanie=mieszkaniec.mieszkanie)
+    oplata_suma = Oplaty.objects.exclude(oplaty_type__name='nadpłata')\
+        .filter(mieszkanie=mieszkaniec.mieszkanie).values('data_platnosci')\
+        .annotate(sum=Sum('saldo'))
 
     oplaty_by_type = {}
     for o in oplaty_all:
@@ -37,7 +43,7 @@ def panel_oplaty_chart_1(request):
             oplaty_by_type[o.oplaty_type.pk] = []
         oplaty_by_type[o.oplaty_type.pk].append(o)
 
-    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items()})
+    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items(),'oplata_suma':oplata_suma})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_2(request):
@@ -64,8 +70,6 @@ def panel_oplaty(request):
         raise Http404("invalid month")
     if not year in range(2000, today.year+1):
         raise Http404("invalid year")
-
-
 
     mieszkaniec = request.user.get_profile()
 

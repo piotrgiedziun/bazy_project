@@ -10,6 +10,7 @@ urlpatterns = patterns('bazy.views',
 
     # panels
     url(r'^panel/main$', views.panel_komunikaty,  name='panel'),
+    url(r'^panel/rozliczenia$', views.panel_rozliczenia,  name='panel_rozliczenia'),
     url(r'^panel/komunikaty$', views.panel_komunikaty,  name='panel_komunikaty'),
     url(r'^panel/komunikat/(?P<news_pk>\d+)$', views.panel_komunikat,  name='panel_komunikat'),
     url(r'^panel/oplaty/main$', views.panel_oplaty, name='panel_oplaty'),

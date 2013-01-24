@@ -9,7 +9,7 @@
             var series_data = [];
 
             {% for k, oplaty_type in oplaty %}
-            series_data[{{ forloop.counter0 }}] = {
+            series_data[series_data.length] = {
                 name: "{{ oplaty_type.0.oplaty_type.name }}",
                 visible: {% if forloop.counter0 < 3 %}true{% else %}false{% endif %},
                 data: [{% for o in oplaty_type %}
@@ -17,6 +17,18 @@
                 {% endfor %}]
             };
             {% endfor %}
+
+            // suma
+            series_data[series_data.length] = {
+                name: "SUMA",
+                visible: false,
+                data: [{% for data in oplata_suma %}
+                    [{{ data.data_platnosci|date:"U" }}*1000,{{ data.sum|floatformat:0 }}]{% if not forloop.last %},{% endif %}
+                {% endfor %}]
+            };
+
+            // wplaty
+
 
             window.chart = new Highcharts.StockChart({
                 chart: {
