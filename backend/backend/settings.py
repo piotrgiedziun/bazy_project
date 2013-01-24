@@ -23,12 +23,12 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
         },
-    'default2': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': os.path.join(ROOT_DIR,'my.cnf'),
-            },
-        }
+ #   'default2': {
+ #       'ENGINE': 'django.db.backends.mysql',
+ #       'OPTIONS': {
+ #           'read_default_file': os.path.join(ROOT_DIR,'my.cnf'),
+ #           },
+ #       }
 }
 
 TIME_ZONE = 'Poland'
