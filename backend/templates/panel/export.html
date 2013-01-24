@@ -1,0 +1,9 @@
+{% extends "panel/base.html" %}
+{% load base_extras %}
+{% load static from staticfiles %}
+
+{% block panel_content %}
+    {% for i in grouped %}
+        {{ i }}
+    {% endfor %}
+{% endblock %}

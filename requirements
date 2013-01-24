@@ -1,3 +1,4 @@
 django==1.4.3
 django-grappelli
 django-bootstrap-form==0.2
+openpyxl

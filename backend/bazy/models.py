@@ -90,6 +90,9 @@ class Oplaty(models.Model):
         verbose_name = u"Opłate"
         verbose_name_plural = u"Opłaty"
 
+    def __unicode__(self):
+        return u"Opłata #%d" % (self.pk,)
+
 class Wplaty(models.Model):
     oplaty = models.OneToOneField(Oplaty)
     data_wplaty = models.DateField()

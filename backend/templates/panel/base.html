@@ -6,9 +6,9 @@
     <div class="tabbable tabs-left">
         <ul class="nav nav-tabs">
             <li class="{% navactive request '_komunikat panel_komunikaty panel' %}"><a href="{% url panel_komunikaty %}">Komunikaty</a></li>
-            <li class="{% navactive request 'panel_oplaty' %}"><a href="{% url panel_oplaty %}">Opłaty</a></li>
+            <li class="{% navactive request '_oplaty' %}"><a href="{% url panel_oplaty %}">Opłaty</a></li>
             <li><a href="#">Rozliczenia</a></li>
-            <li><a href="#">Eksportuj</a></li>
+            <li class="{% navactive request 'panel_export_main' %}"><a href="{% url panel_export_main %}">Eksportuj</a></li>
             <li class="{% navactive request 'password_change' %}"><a href="{% url password_change %}">Zmień hasło</a></li>
             <li><a href="{% url logout %}">Wyloguj</a></li>
         </ul>

@@ -1,0 +1,12 @@
+{% extends "panel/oplaty_base.html" %}
+{% load base_extras %}
+{% load static from staticfiles %}
+
+{% block oplaty_content %}
+    WYKRES
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static "js/arrows.js" %}"></script>
+{% endblock %}
