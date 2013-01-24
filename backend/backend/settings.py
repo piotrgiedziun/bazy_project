@@ -22,7 +22,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
-    },
+        },
     'default2': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
