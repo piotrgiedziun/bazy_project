@@ -1,0 +1,100 @@
+{% extends "panel/oplaty_base.html" %}
+{% load base_extras %}
+{% load static from staticfiles %}
+
+{% block oplaty_content %}
+    <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
+        $(function () {
+
+            window.chart = new Highcharts.Chart({
+                title: {
+                    text: ''
+                },
+                chart: {
+                    renderTo: 'container',
+                    polar: true,
+                    type: 'line'
+                },
+                navigation: {
+                    buttonOptions: {
+                        enabled: false
+                    }
+                },
+                pane: {
+                    size: '80%'
+                },
+
+                xAxis: {
+                    categories: [
+                        {% for o in oplaty %}
+                        '{{ o.oplaty_type__name }}'{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0
+                },
+
+                yAxis: {
+                    gridLineInterpolation: 'polygon',
+                    lineWidth: 0,
+                    min: 0
+                },
+
+                tooltip: {
+                    shared: true
+                },
+                credits : {
+                    enabled : false
+                },
+                legend: {
+                    align: 'center',
+                    verticalAlign: 'top',
+                    layout: 'horizontal'
+                },
+
+                series: [{
+                    name: 'Wartość maksymalna',
+                    data: [
+                        {% for o in oplaty %}
+                            {{ o.max|floatformat:0  }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    pointPlacement: 'on'
+                }, {
+                    name: 'Wartość minimalna',
+                    data: [
+                        {% for o in oplaty %}
+                            {{ o.min|floatformat:0  }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    pointPlacement: 'on'
+                },{
+                    name: 'Wartość średnia',
+                    data: [
+                        {% for o in oplaty %}
+                            {{ o.avg|floatformat:0  }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    pointPlacement: 'on'
+                },{
+                    name: 'Suma',
+                    data: [
+                        {% for o in oplaty %}
+                            {{ o.sum|floatformat:0  }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    pointPlacement: 'on'
+                }]
+
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+{% endblock %}

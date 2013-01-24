@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.conf import settings
-from django.db.models import Count
+from django.db.models import Sum, Avg, Max, Min
 
 # internal
 from models import Newsy, Oplaty, Mieszkaniec
@@ -35,16 +35,16 @@ def panel_oplaty_chart_1(request):
         if not o.oplaty_type.pk in oplaty_by_type:
             oplaty_by_type[o.oplaty_type.pk] = []
         oplaty_by_type[o.oplaty_type.pk].append(o)
-    print oplaty_by_type.items()
+
     return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty_by_type.items()})
 
 @login_mieszkaniec_required
 def panel_oplaty_chart_2(request):
-    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
+    mieszkaniec = request.user.get_profile()
 
-@login_mieszkaniec_required
-def panel_oplaty_statistics(request):
-    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
+    oplaty = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).values('oplaty_type__name').annotate(avg=Avg('saldo'), max=Max('saldo'), min=Min('saldo'), sum=Sum('saldo'))
+
+    return render(request, 'panel/oplaty_chart_2.html', {'title': 'Oplaty (wykres)', 'oplaty': oplaty})
 
 @login_mieszkaniec_required
 def panel_oplaty(request):
