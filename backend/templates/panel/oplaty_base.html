@@ -8,8 +8,8 @@
             <ul class="nav nav-pills">
                 <li class="{% navactive request 'panel_oplaty' %}"><a href="{% url panel_oplaty %}">Tabela</a></li>
                 <li class="{% navactive request 'panel_oplaty_chart_1' %}"><a href="{% url panel_oplaty_chart_1 %}">Wykres #1</a></li>
-                <li><a href="#">Wykres #2</a></li>
-                <li><a href="#">Statystyki</a></li>
+                <li class="{% navactive request 'panel_oplaty_chart_2' %}"><a href="{% url panel_oplaty_chart_2 %}">Wykres #2</a></li>
+                <li class="{% navactive request 'panel_oplaty_statistics' %}"><a href="{% url panel_oplaty_statistics %}">Statystyki</a></li>
             </ul>
         </div>
     </div>

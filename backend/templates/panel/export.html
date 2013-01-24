@@ -3,7 +3,16 @@
 {% load static from staticfiles %}
 
 {% block panel_content %}
-    {% for i in grouped %}
-        {{ i }}
-    {% endfor %}
+    <h1>Eksporuj opłaty</h1>
+    <p>Dostępne są zestawienia całoroczne. Po naciśnięniu na poniższy button wybież z listy odpowiedni rok.</p>
+    <div style="height: 200px;">
+        <div class="btn-group">
+            <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">Eksportuj rok <span
+                    class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">2013</a></li>
+                <li><a href="#">2012</a></li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

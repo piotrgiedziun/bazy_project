@@ -3,6 +3,9 @@ $(function() {
     $(".report").click(function(e) {
         var clicked = $(this);
 
+        $(".alert-success").hide();
+        $(".modal-body, .modal-footer").show();
+
         $("#message").removeAttr('readonly');
 
         $('.date').text(clicked.attr('data-date'));
@@ -22,7 +25,9 @@ $(function() {
         setTimeout(function () {
             btn.button('reset');
             $("#message").removeAttr('readonly');
-        }, 3000);
+            $(".modal-body, .modal-footer").hide();
+            $(".alert-success").show();
+        }, 2000);
         e.preventDefault();
         return false;
     });

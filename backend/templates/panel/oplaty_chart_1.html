@@ -3,10 +3,41 @@
 {% load static from staticfiles %}
 
 {% block oplaty_content %}
-    WYKRES
+    <div id="container" style="height: 500px; min-width: 500px"></div>
+    <script>
+        $(function() {
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+                // Create the chart
+                window.chart = new Highcharts.StockChart({
+                    chart: {
+                        renderTo: 'container'
+                    },
+
+                    rangeSelector: {
+                        selected: 1
+                    },
+
+                    title: {
+                        text: 'AAPL Stock Price'
+                    },
+
+                    series: [{
+                        name: 'AAPL Stock Price',
+                        data: data,
+                        step: true,
+                        tooltip: {
+                            valueDecimals: 2
+                        }
+                    }]
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
     <script src="{% static "js/arrows.js" %}"></script>
 {% endblock %}

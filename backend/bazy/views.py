@@ -29,6 +29,14 @@ def panel_oplaty_chart_1(request):
     return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
 
 @login_mieszkaniec_required
+def panel_oplaty_chart_2(request):
+    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
+
+@login_mieszkaniec_required
+def panel_oplaty_statistics(request):
+    return render(request, 'panel/oplaty_chart_1.html', {'title': 'Oplaty (wykres)'})
+
+@login_mieszkaniec_required
 def panel_oplaty(request):
     today = date.today()
 
