@@ -36,11 +36,13 @@ def panel_rozliczenia(request):
     saldo = oplaty_suma['sum']-wplaty_suma['sum']
     nadplata = 0
 
-    ostatnia_nadplata = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie, oplaty_type__name='nadpłata').latest('pk')
     ostatnia_oplata = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie).latest('pk')
-
-    if ostatnia_oplata.data_platnosci <= ostatnia_nadplata.data_platnosci:
-         nadplata = abs(ostatnia_nadplata.saldo)
+    try:
+        ostatnia_nadplata = Oplaty.objects.filter(mieszkanie=mieszkaniec.mieszkanie, oplaty_type__name='nadpłata').latest('pk')
+        if ostatnia_oplata.data_platnosci <= ostatnia_nadplata.data_platnosci:
+            nadplata = abs(ostatnia_nadplata.saldo)
+    except Oplaty.DoesNotExist:
+        nadplata = 0
 
     return render(request, 'panel/rozliczenia.html', {'title': 'Rozliczenia', 'saldo': saldo, 'nadplata': nadplata, 'ostatnia_oplata': ostatnia_oplata})
 
