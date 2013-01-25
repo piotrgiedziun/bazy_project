@@ -1,0 +1,118 @@
+<style>
+	li {
+		margin-top: 20px;
+	}
+	#context {
+		width: 600px;
+		margin: 0 auto;
+		margin-top: 10px;	
+	}
+	a:visited {
+		color: blue;
+	}
+</style>
+
+
+<div id="context">
+	<h2>Code highlights</h2>
+
+
+	<ul>
+		<li>
+			<strong>custom manage commands </strong></br>
+			<a 
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/management/commands/populate.py">
+				python manage.py populate [--clear] [populate_size] [populate_per_home]
+			</a>
+		</li>
+
+		<li>
+			<strong>custom template tags</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/templatetags/base_extras.py">
+				navactive, navactive_contains, pln
+			</a><br/>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/templates/panel/oplaty.html#L52">
+				usage pln
+			</a><br/>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/templates/panel/base.html#L8-L13">
+				usage navactive, navactive_contains
+			</a>
+		</li>
+
+		<li>
+			<strong>custom decorators</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/decorators.py">
+				login_mieszkaniec_required
+			</a>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/views.py#L28">
+				usage login_mieszkaniec_required
+			</a>
+		</li>
+
+		<li>
+			<strong>flash massages</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/backend/settings.py#L125">
+				MESSAGE_STORAGE
+			</a><br/>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/views.py#L239">
+				usage messages
+			</a>
+		</li>
+
+		<li>
+			<strong>exporting xls</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/views.py#L165">
+				function
+			</a>
+
+
+		</li>
+
+		<li>
+			<strong>admin - grappelli</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/admin.py">
+				admin.py
+			</a>
+		</li>
+
+		<li>
+			<strong>urls (names, regexp)</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/urls.py">
+				urls.py
+			</a>
+		</li>
+
+		<li>
+			<strong>model</strong></br>
+			<a
+				target="_blank"
+				href="https://github.com/piotrgiedziun/bazy_project/blob/master/backend/bazy/models.py">
+				models.py
+			</a>
+		</li>
+	</ul>
+
+	<i>test server <a href="http://156.17.234.23:8080/auth/login/">http://156.17.234.23:8080/auth/login/</a></i>
+
+</div>
