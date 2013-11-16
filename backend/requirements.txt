@@ -1,0 +1,5 @@
+Django==1.4.3
+django-bootstrap-form==0.2
+django-grappelli==2.4.7
+openpyxl==1.6.2
+wsgiref==0.1.2
